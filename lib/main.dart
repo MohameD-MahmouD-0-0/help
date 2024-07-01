@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/Game/features/game/business%20logic/tic_tac_toe_provider.dart';
+import 'package:flutter_application_1/screens/DrageInfo.dart';
+import 'package:flutter_application_1/screens/EscortDetails.dart';
 import 'package:flutter_application_1/screens/addPaitientInfo_screen.dart';
 import 'package:flutter_application_1/screens/login_screen.dart';
 import 'package:flutter_application_1/screens/register_screen.dart';
@@ -78,6 +80,7 @@ class _ZEEState extends State<ZEE> {
                 'RegisterScreen': (context) => RegisterScreen(),
                 'StartScreen': (context) => StartScreen(),
                 AddScreen.routeName: (context) => AddScreen(),
+                DrugInfoScreen.routeName:(context)=> DrugInfoScreen(),
                 AddPatientInfo.routeName: (context) => AddPatientInfo(),
                 'AddDocument': (context) => AddDocument(),
               },

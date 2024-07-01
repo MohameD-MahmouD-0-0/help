@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/button_com.dart';
 import 'package:flutter_application_1/components/textField_com.dart';
+import 'package:flutter_application_1/screens/DrageInfo.dart';
 
 import 'Api/api_manager.dart';
 import 'Register/PatientInfo.dart';
@@ -280,9 +282,10 @@ class _AddPatientInfoState extends State<AddPatientInfo> {
                   ),
                   ButtonComponent(
                     () {
+                      Navigator.of(context).pushNamed(DrugInfoScreen.routeName);
                     },
                     buttonWidth: 165,
-                    buttonName: 'Add',
+                    buttonName: 'Add Medicine',
                   ),
                   const SizedBox(
                     height: 10,
@@ -292,7 +295,7 @@ class _AddPatientInfoState extends State<AddPatientInfo> {
               TextButton(
                   onPressed: () {
                     addPatient();
-                    Navigator.o;},
+                    },
                   child: Text('Add')),
               TextButton(
                   onPressed: () {

@@ -5,6 +5,7 @@ class Api_constant {
   static const String Diseases = '/erd/api/Diseases/';
   static const String Escort   = '/erd/api/Escort/';
   static const String Login   = '/erd/api/Login/';
+  static const String Drage   = '/erd/api/Medicine/';
 
 }
 // "http://sondosrepo-production.up.railway.app

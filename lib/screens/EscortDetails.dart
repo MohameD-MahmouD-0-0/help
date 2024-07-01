@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class EscortInfo extends StatelessWidget {
+  static const String routeName = 'Escort';
   final String firstName;
   final String lastName;
   final String email;

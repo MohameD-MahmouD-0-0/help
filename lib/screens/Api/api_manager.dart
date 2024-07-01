@@ -8,6 +8,8 @@ import 'package:flutter_application_1/screens/Escort/Escort_response.dart';
 import 'package:flutter_application_1/screens/add_screen.dart';
 import 'package:http/http.dart' as http;
 import '../../Dialog.dart';
+import '../Drage/Drage_Request.dart';
+import '../Drage/Drage_Response.dart';
 import '../Escort/EscortResponse.dart';
 import '../Login/Login_Response.dart';
 import '../Paitent/paitentRequest.dart';
@@ -43,8 +45,8 @@ class Api_manager {
             message: "Register Succuessfully",
             title: "Success",
             posActionName: 'Ok', posAction: () {
-          Navigator.of(context).pushNamed(AddScreen.routeName);
-        });
+              Navigator.of(context).pushNamed(AddScreen.routeName);
+            });
         return RegisterResponse.fromJson(jsonDecode(response.body));
       }
       if (response.statusCode == 400) {
@@ -61,17 +63,18 @@ class Api_manager {
   }
 
   static Future<LoginResponse?> Login(
-      String name,
-      String Password,
-      BuildContext context) async {
-    Uri url = Uri.https(Api_constant.baseurl, Api_constant.register);
+      String name, String Password, BuildContext context) async {
+    Uri url = Uri.https(Api_constant.baseurl, Api_constant.Login);
     DialogUtils.showLoading(context, "Loding");
     try {
-      var requestbody = RegisterRequest(
-          name: name,
-          password: Password);
-      var response = await http.post(url, body: requestbody.toJson());
-      print(response.body);
+      var headers = {'Content-Type': 'application/json'};
+      Map<String, String> requestbody = {
+        "username": name,
+        'Password': Password,
+      };
+      var response =
+      await http.post(url, body: jsonEncode(requestbody), headers: headers);
+
       if (response.statusCode == 201) {
         DialogUtils.closeLoading(context);
         DialogUtils.showMessage(context,
@@ -94,6 +97,7 @@ class Api_manager {
     }
     return null;
   }
+
   static Future<DiseaseResponse?> registerDisease(
       String deasesname,
       String deasesDiscription,
@@ -118,8 +122,8 @@ class Api_manager {
             message: "Disease Added successfully",
             title: "Success",
             posActionName: 'Ok', posAction: () {
-          Navigator.of(context).pushNamed(AddPatientInfo.routeName);
-        });
+              Navigator.of(context).pushNamed(AddPatientInfo.routeName);
+            });
         return DiseaseResponse.fromJson(jsonDecode(response.body));
       }
       if (response.statusCode == 400) {
@@ -208,6 +212,8 @@ class Api_manager {
     Uri url = Uri.https(Api_constant.baseurl, Api_constant.Escort);
     DialogUtils.showLoading(context, "Loding");
     try {
+      print('function test');
+      print(firstName);
       var requestbody = EscortRequest(
           firstName: firstName,
           lasttName: lasttName,
@@ -217,16 +223,19 @@ class Api_manager {
           male: male,
           female: female);
 
-      var response = await http.post(url, body: requestbody.toJson());
+      var headers = {'Content-Type': 'application/json'};
+      var response = await http.post(url,
+          body: jsonEncode(requestbody.toJson()), headers: headers);
+      print(response.statusCode);
+      print(response.body);
       if (response.statusCode == 201) {
         DialogUtils.closeLoading(context);
         DialogUtils.showMessage(context,
             message: "Register Succuessfully",
             title: "Success",
             posActionName: 'Ok', posAction: () {
-          Navigator.of(context).pushNamed(AddScreen.routeName);
-        });
-        return EscortResponse.fromJson(jsonDecode(response.body));
+              Navigator.of(context).pushNamed(AddScreen.routeName);
+            });
       }
       if (response.statusCode == 400) {
         DialogUtils.closeLoading(context);
@@ -236,8 +245,52 @@ class Api_manager {
             posActionName: 'Ok');
       }
     } catch (e) {
+      print(e);
+      throw e;
+    }
+    return null;}
+  static Future<DrageResponse?> Drage(
+      String drugName,
+      String purposeOfUse,
+      String description,
+      String durationOfUse,
+      int numberOfTimesDay,
+      String type,
+      String expireDate,
+      int pillsnum,
+      BuildContext context) async {
+    Uri url = Uri.https(Api_constant.baseurl, Api_constant.Drage);
+    DialogUtils.showLoading(context, "Loding");
+    try {
+      var requestbody = DrageRequest(
+          drugName: drugName,purposeOfUse: purposeOfUse,description:
+      description,durationOfUse: durationOfUse,
+          numberOfTimesDay: numberOfTimesDay,
+          type: type,expireDate: expireDate,pillsnum: pillsnum
+      );
+      var response = await http.post(url, body: requestbody.toJson());
+      if (response.statusCode == 201) {
+        DialogUtils.closeLoading(context);
+        DialogUtils.showMessage(context,
+            message: "Register Succuessfully",
+            title: "Success",
+            posActionName: 'Ok', posAction: () {
+              Navigator.of(context).pushNamed(AddScreen.routeName);
+            });
+        return DrageResponse.fromJson(jsonDecode(response.body));
+      }
+      if (response.statusCode == 400) {
+        DialogUtils.closeLoading(context);
+        DialogUtils.showMessage(context,
+            message: "register with this name already exists  ",
+            title: "Fail",
+            posActionName: 'Ok');
+      }
+    } catch (e) {
       throw e;
     }
     return null;
   }
 }
+
+

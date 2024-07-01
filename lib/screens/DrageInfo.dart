@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/components/button_com.dart';
 import 'package:flutter_application_1/components/textField_com.dart';
+import 'package:flutter_application_1/screens/Api/api_manager.dart';
 
 class DrugInfoScreen extends StatefulWidget {
+  static const String routeName = 'Drage';
   @override
   State<DrugInfoScreen> createState() => _DrugInfoScreenState();
 }
@@ -26,7 +28,7 @@ class _DrugInfoScreenState extends State<DrugInfoScreen> {
       body: Container(
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('lib/assets/drug_info.png'),
+            image: AssetImage('lib/assets/login.png'),
             fit: BoxFit.cover,
           ),
         ),
@@ -63,19 +65,6 @@ class _DrugInfoScreenState extends State<DrugInfoScreen> {
                   labelText: 'Drug Name',
                   inputType: TextInputType.text,
                   preIcon: Icons.medication,
-                ),
-                const SizedBox(height: 10),
-                TextFieldComponent(
-                  controlleR: drugIDController,
-                  validate: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter the Drug ID';
-                    }
-                    return null;
-                  },
-                  labelText: 'Drug ID',
-                  inputType: TextInputType.number,
-                  preIcon: Icons.confirmation_number,
                 ),
                 const SizedBox(height: 10),
                 TextFieldComponent(
@@ -171,9 +160,7 @@ class _DrugInfoScreenState extends State<DrugInfoScreen> {
                 const SizedBox(height: 10),
                 ButtonComponent(
                       () {
-                    if (formKey.currentState!.validate()) {
-                      // Perform API call or other actions
-                    }
+                        addMedicine();
                   },
                   buttonName: 'Submit',
                 ),
@@ -185,4 +172,18 @@ class _DrugInfoScreenState extends State<DrugInfoScreen> {
       ),
     );
   }
+
+  void addMedicine() {
+    Api_manager.Drage(
+        drugNameController.text,
+        purposeController.text,
+        descriptionController.text,
+        durationController.text,
+        timesPerDayController.text as int,
+        typeController.text,
+        expireDateController.text,
+        pillsNumController.text as int,
+        context);
+  }
+
 }
