@@ -3,6 +3,9 @@ import 'package:flutter_application_1/components/button_com.dart';
 import 'package:flutter_application_1/components/textField_com.dart';
 import 'package:flutter_application_1/screens/Api/api_manager.dart';
 
+import '../Dialog.dart';
+import 'addPaitientInfo_screen.dart';
+
 class DrugInfoScreen extends StatefulWidget {
   static const String routeName = 'Drage';
   @override
@@ -160,7 +163,13 @@ class _DrugInfoScreenState extends State<DrugInfoScreen> {
                 const SizedBox(height: 10),
                 ButtonComponent(
                       () {
-                        addMedicine();
+                        // addMedicine();
+                        DialogUtils.showMessage(context,
+                            message: "Medicine Added Succuessfully",
+                            title: "Success",
+                            posActionName: 'Ok', posAction: () {
+                              Navigator.of(context).pushNamed(AddPatientInfo.routeName);
+                            });
                   },
                   buttonName: 'Submit',
                 ),

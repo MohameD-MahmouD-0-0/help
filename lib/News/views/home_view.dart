@@ -6,6 +6,8 @@ import 'package:flutter_application_1/News/widgets/news_list_view_builder.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+import '../../videoCall/call_page.dart';
+
 class HomeView extends StatelessWidget {
   const HomeView({super.key});
 
@@ -16,6 +18,16 @@ class HomeView extends StatelessWidget {
       floatingActionButton: Column(
         mainAxisAlignment: MainAxisAlignment.end,
         children: [
+          ElevatedButton(
+            child: Text('Accept Video Call'),
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) => const CallPage(callID: 'u1u2'),),);
+            },
+          ),
+          SizedBox(
+            height: 12,
+          ),
           ElevatedButton(
             child: Text('Urgent Call'),
             onPressed: () {
@@ -41,19 +53,19 @@ class HomeView extends StatelessWidget {
         centerTitle: true,
         title: RichText(
             text: const TextSpan(children: [
-          TextSpan(
-              text: 'Hello',
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
-          TextSpan(
-              text: '',
-              style: TextStyle(
-                  color: Color.fromARGB(255, 220, 192, 31),
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold))
-        ])),
+              TextSpan(
+                  text: 'Hello',
+                  style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold)),
+              TextSpan(
+                  text: '',
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 220, 192, 31),
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold))
+            ])),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 6.0),
@@ -64,8 +76,8 @@ class HomeView extends StatelessWidget {
                 onTap: () {
                   Navigator.push(context,
                       MaterialPageRoute(builder: ((context) {
-                    return SelectGame();
-                  })));
+                        return SelectGame();
+                      })));
                 },
                 child: Container(
                   width: double.infinity,
@@ -97,7 +109,6 @@ class HomeView extends StatelessWidget {
     );
   }
 }
-
 void openWhatsApp(String phoneNumber) async {
   final Uri whatsappUrl = Uri.parse("https://wa.me/$phoneNumber");
 
